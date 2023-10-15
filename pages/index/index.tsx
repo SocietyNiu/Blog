@@ -1,0 +1,41 @@
+import React from 'react'
+import Navbar from '../../component/navbar'
+import MainPage from './component/mainPage'
+import { getHomeConfig } from '../../common/api'
+import mainpage from '../../json/navigate_bar.json'
+import { homeConfig } from '../../constant/type'
+
+interface IindexState {
+  homeConfig?: homeConfig
+}
+export default class Home extends React.Component<{}, IindexState> {
+  constructor(props: {}) {
+    super(props)
+    this.state = {
+      homeConfig: undefined
+    }
+  }
+  componentDidMount(): void {
+    getHomeConfig().then((res) => {
+      this.setState({
+        homeConfig: res
+      })
+    })
+  }
+  render() {
+    const { homeConfig = {} } = this.state
+    if (homeConfig) {
+      const { site_name = '', main_page, navigate_bar } = homeConfig
+      return (
+        <div>
+          <Navbar title={site_name} linkItemList={navigate_bar} />
+          <MainPage
+            title={main_page?.title}
+            subtitle={main_page?.subtitle}
+            iconItemList={main_page?.icon_list}
+          ></MainPage>
+        </div>
+      )
+    }
+  }
+}

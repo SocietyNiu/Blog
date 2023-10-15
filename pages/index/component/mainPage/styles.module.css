@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  width: 1100px;
+  margin: auto;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+}
+.title {
+  font-weight: 600;
+  color: #2e2e2e;
+  font-size: 4.5em;
+}
+.subtitle {
+  margin-top: 20px;
+  color: #2e2e2e;
+  font-size: 1.2em;
+}
+.iconContainer {
+  margin-top: 20px;
+  display: flex;
+}
