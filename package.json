@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.10.0",
     "babel-plugin-import": "^1.13.8",
     "body-parser": "^1.20.2",
@@ -20,6 +21,7 @@
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^9.0.0",
     "silly-datetime": "^0.1.2"
   },
   "devDependencies": {

@@ -2,15 +2,15 @@ import React from 'react'
 import Navbar from '../../component/navbar'
 import MainPage from './component/mainPage'
 import { getHomeConfig } from '../../common/api'
-import mainpage from '../../json/navigate_bar.json'
-import { homeConfig } from '../../constant/type'
+import { HomeConfig } from '../../constant/type'
 
 interface IindexState {
-  homeConfig?: homeConfig
+  homeConfig?: HomeConfig
 }
 export default class Home extends React.Component<{}, IindexState> {
   constructor(props: {}) {
     super(props)
+
     this.state = {
       homeConfig: undefined
     }

@@ -2,20 +2,20 @@ import { iconItem } from '../component/iconItem'
 import { linkItem } from '../component/navbar'
 
 export const getHomeConfigUrl = '/api/get_home_config'
-
-export interface databaseResponse {
+export const getPostUrl = '/api/get_post'
+export interface DatabaseResponse {
   state: number
   message: string
-  data?: homeConfigResponse
+  data?: HomeConfigResponse | PostResponse
 }
 
-export interface homeConfigResponse {
+export interface HomeConfigResponse {
   site_name?: string
   main_page?: string
   navigate_bar?: string
 }
 
-export interface homeConfig {
+export interface HomeConfig {
   site_name?: string
   main_page?: {
     title?: string
@@ -23,4 +23,11 @@ export interface homeConfig {
     icon_list?: iconItem[]
   }
   navigate_bar?: linkItem[]
+}
+
+export interface PostResponse {
+  _id?: number
+  title?: string
+  content?: string
+  time?: number
 }
