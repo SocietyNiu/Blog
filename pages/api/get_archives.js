@@ -8,14 +8,13 @@ const db = require('./db')
 
 const router = express.Router()
 
-router.get('/api/get_post', function (req, res) {
-  const _id = req.query._id
-  const sql = `select * from posts where _id=${_id}`
+router.get('/api/get_archives', function (req, res) {
+  const sql = 'select _id,title,time from posts'
   db.query(sql, (err, result) => {
     if (err) {
       return res.send({ state: 1, message: err })
     }
-    return res.send({ state: 0, message: '查询成功', data: result[0] })
+    return res.send({ state: 0, message: '查询成功', data: result })
   })
 })
 

@@ -3,6 +3,7 @@ import Navbar from '../../component/navbar'
 import MainPage from './component/mainPage'
 import { getHomeConfig } from '../../common/api'
 import { HomeConfig } from '../../constant/type'
+import Waiting from '../../component/waiting'
 
 interface IindexState {
   homeConfig?: HomeConfig
@@ -23,19 +24,20 @@ export default class Home extends React.Component<{}, IindexState> {
     })
   }
   render() {
-    const { homeConfig = {} } = this.state
-    if (homeConfig) {
-      const { site_name = '', main_page, navigate_bar } = homeConfig
-      return (
-        <div>
-          <Navbar title={site_name} linkItemList={navigate_bar} />
-          <MainPage
-            title={main_page?.title}
-            subtitle={main_page?.subtitle}
-            iconItemList={main_page?.icon_list}
-          ></MainPage>
-        </div>
-      )
+    const { homeConfig = undefined } = this.state
+    if (!homeConfig) {
+      return <Waiting></Waiting>
     }
+    const { site_name = '', main_page, navigate_bar } = homeConfig
+    return (
+      <div>
+        <Navbar title={site_name} linkItemList={navigate_bar} />
+        <MainPage
+          title={main_page?.title}
+          subtitle={main_page?.subtitle}
+          iconItemList={main_page?.icon_list}
+        ></MainPage>
+      </div>
+    )
   }
 }

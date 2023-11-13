@@ -16,7 +16,12 @@ export default class Navbar extends React.Component<INavbarProps> {
     return (
       <div className={styles.container}>
         <div className={styles.title}>
-          <LinkItem content={title} fontSize={26} isTitle={true}></LinkItem>
+          <LinkItem
+            content={title}
+            fontSize={26}
+            isTitle={true}
+            url="/"
+          ></LinkItem>
         </div>
         <div className={styles.linkItemBar}>
           {linkItemList &&

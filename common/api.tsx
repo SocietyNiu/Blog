@@ -4,9 +4,10 @@ import {
   HomeConfig,
   getPostUrl,
   HomeConfigResponse,
-  PostResponse
+  PostResponse,
+  getAllArchives
 } from '../constant/type'
-import posts, { Posts } from '../pages/posts'
+import { Posts } from '../pages/posts'
 import { safeJsonParse } from './utils'
 
 export const getHomeConfig = () => {
@@ -38,12 +39,13 @@ export const getHomeConfig = () => {
   })
 }
 
-export const getPost = () => {
+export const getPost = (_id: string) => {
   return new Promise<Posts>((resolve, reject) => {
-    fetch(getPostUrl).then((res) => {
+    fetch(`${getPostUrl}?_id=${_id}`).then((res) => {
       res
         .json()
         .then((data: DatabaseResponse) => {
+          console.log(data)
           if (data?.state === 0 && data?.data) {
             const postResponse = data.data as PostResponse
             const post: Posts = {
@@ -61,5 +63,28 @@ export const getPost = () => {
           reject(new Error('Failed to fetch post data'))
         })
     })
+  })
+}
+
+export const getArchives = () => {
+  return new Promise<Posts[]>((resolve, reject) => {
+    fetch(getAllArchives)
+      .then((res) => {
+        res
+          .json()
+          .then((data: DatabaseResponse) => {
+            if (data?.state === 0 && data?.data) {
+              resolve(data.data as PostResponse[] as Posts[])
+            } else {
+              reject(new Error('Failed to fetch archive data'))
+            }
+          })
+          .catch(() => {
+            reject(new Error('Failed to fetch archive data'))
+          })
+      })
+      .catch(() => {
+        reject(new Error('Failed to fetch archive data'))
+      })
   })
 }

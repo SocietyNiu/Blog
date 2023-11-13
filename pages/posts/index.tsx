@@ -6,6 +6,8 @@ import { getHomeConfig, getPost } from '../../common/api'
 import { HomeConfig } from '../../constant/type'
 import Navbar from '../../component/navbar'
 import TitleList from './component/titleList'
+import { transformDate2String } from '../../common/utils'
+import Waiting from '../../component/waiting'
 
 export interface Posts {
   _id?: number
@@ -21,8 +23,8 @@ export default class posts extends React.Component<{}, IPostState> {
   constructor(props: {}) {
     super(props)
     this.state = {
-      homeConfig: {},
-      post: {}
+      homeConfig: undefined,
+      post: undefined
     }
   }
   componentDidMount(): void {
@@ -31,11 +33,17 @@ export default class posts extends React.Component<{}, IPostState> {
         homeConfig: res
       })
     })
-    getPost().then((res) => {
-      this.setState({
-        post: res
+
+    const urlParams = new URLSearchParams(window.location.search)
+    const _id = urlParams.get('_id')
+
+    if (_id) {
+      getPost(_id).then((res) => {
+        this.setState({
+          post: res
+        })
       })
-    })
+    }
   }
   transformTitle(markdown?: string) {
     if (!markdown) return undefined
@@ -50,31 +58,11 @@ export default class posts extends React.Component<{}, IPostState> {
     }
     return titles
   }
-  transformDate(date?: number) {
-    if (!date) return null
-    var time = new Date(date)
-    var year = time.getFullYear()
-    var month = time.getMonth() + 1
-    var day = time.getDate()
-    var hour = time.getHours()
-    var minute = time.getMinutes()
-    var second = time.getSeconds()
-    return (
-      year +
-      '-' +
-      (month < 10 ? '0' + month : month) +
-      '-' +
-      (day < 10 ? '0' + day : day) +
-      ' ' +
-      (hour < 10 ? '0' + hour : hour) +
-      ':' +
-      (minute < 10 ? '0' + minute : minute) +
-      ':' +
-      (second < 10 ? '0' + second : second)
-    )
-  }
   render() {
-    const { homeConfig = {}, post } = this.state
+    const { homeConfig = undefined, post = undefined } = this.state
+    if (!homeConfig || !post) {
+      return <Waiting></Waiting>
+    }
     const { site_name = '', navigate_bar } = homeConfig
     return (
       <div>
@@ -82,7 +70,7 @@ export default class posts extends React.Component<{}, IPostState> {
         <div className={styles.container}>
           <div className={styles.title}>{post?.title}</div>
           <div className={styles.date} suppressHydrationWarning>
-            {this.transformDate(post?.time)}
+            {transformDate2String(post?.time)}
           </div>
           {}
           <TitleList title={this.transformTitle(post?.content)}></TitleList>

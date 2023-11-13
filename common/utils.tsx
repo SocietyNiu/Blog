@@ -8,3 +8,36 @@ export const safeJsonParse = (json: string | undefined) => {
     return undefined
   }
 }
+
+export const transformDate2String = (date?: number, type?: 'time' | 'date') => {
+  if (!date) return null
+  var time = new Date(date)
+  var year = time.getFullYear()
+  var month = time.getMonth() + 1
+  var day = time.getDate()
+  var hour = time.getHours()
+  var minute = time.getMinutes()
+  var second = time.getSeconds()
+  if (type === 'date') {
+    return (
+      year +
+      '-' +
+      (month < 10 ? '0' + month : month) +
+      '-' +
+      (day < 10 ? '0' + day : day)
+    )
+  }
+  return (
+    year +
+    '-' +
+    (month < 10 ? '0' + month : month) +
+    '-' +
+    (day < 10 ? '0' + day : day) +
+    ' ' +
+    (hour < 10 ? '0' + hour : hour) +
+    ':' +
+    (minute < 10 ? '0' + minute : minute) +
+    ':' +
+    (second < 10 ? '0' + second : second)
+  )
+}

@@ -3,10 +3,14 @@ import { linkItem } from '../component/navbar'
 
 export const getHomeConfigUrl = '/api/get_home_config'
 export const getPostUrl = '/api/get_post'
+export const getAllArchives = 'api/get_archives'
+
+export const postUrl = '/posts'
+
 export interface DatabaseResponse {
   state: number
   message: string
-  data?: HomeConfigResponse | PostResponse
+  data?: HomeConfigResponse | PostResponse | PostResponse[]
 }
 
 export interface HomeConfigResponse {
