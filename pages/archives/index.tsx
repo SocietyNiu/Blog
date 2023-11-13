@@ -47,9 +47,13 @@ export default class ArchivesList extends React.Component<
         {homeConfig && <Navbar title={site_name} linkItemList={navigate_bar} />}
         <div className={styles.container}>
           {archive &&
-            archive.map((item) => {
+            archive.map((item, idx) => {
               return (
-                <a className={styles.item} href={`${postUrl}?_id=${item._id}`}>
+                <a
+                  className={styles.item}
+                  href={`${postUrl}?_id=${item._id}`}
+                  key={idx}
+                >
                   <div className={styles.title}>{item.title}</div>
                   <div className={styles.time}>
                     {transformDate2String(item.time, 'date')}

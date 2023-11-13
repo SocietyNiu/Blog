@@ -12,14 +12,14 @@ export default class TitleList extends React.Component<ITitleListProps> {
     const { title = [] } = this.props
     return (
       <div className={styles.container}>
-        {title?.map((item) => {
+        {title?.map((item, idx) => {
           const { level, titleText } = item
           const style = {
             marginLeft: `${level * 20}px`,
             fontSize: `${24 - level * 4}px`,
             lineHeight: '30px'
           }
-          return <div style={style}>{titleText}</div>
+          return <div style={style} key={idx}>{titleText}</div>
         })}
       </div>
     )

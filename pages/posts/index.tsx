@@ -75,7 +75,7 @@ export default class posts extends React.Component<{}, IPostState> {
           {}
           <TitleList title={this.transformTitle(post?.content)}></TitleList>
           <div className={styles.content}>
-            <ReactMarkdown children={post?.content}></ReactMarkdown>
+            <ReactMarkdown>{post?.content}</ReactMarkdown>
           </div>
         </div>
       </div>
