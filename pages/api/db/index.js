@@ -1,9 +1,13 @@
 const mysql = require('mysql')
 
+const DB_HOST = process.env.DB_HOST
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = process.env.DB_PASSWORD
+
 const db = mysql.createPool({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'nyt021126',
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
   database: 'myblog'
 })
 
