@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import styles from './styles.module.css'
 import { getHomeConfig, getPost } from '../../common/api'
@@ -8,6 +7,9 @@ import Navbar from '../../component/navbar'
 import TitleList from './component/titleList'
 import { transformDate2String } from '../../common/utils'
 import Waiting from '../../component/waiting'
+import 'github-markdown-css'
+import BottomBar from '../../component/bottomBar'
+import MarkdownPage from '../../component/MarkdownPage'
 
 export interface Posts {
   _id?: number
@@ -72,12 +74,12 @@ export default class posts extends React.Component<{}, IPostState> {
           <div className={styles.date} suppressHydrationWarning>
             {transformDate2String(post?.time)}
           </div>
-          {}
           <TitleList title={this.transformTitle(post?.content)}></TitleList>
           <div className={styles.content}>
-            <ReactMarkdown>{post?.content}</ReactMarkdown>
+            <MarkdownPage markdownContent={post.content}></MarkdownPage>
           </div>
         </div>
+        <BottomBar />
       </div>
     )
   }

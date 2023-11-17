@@ -4,7 +4,7 @@ import { Posts } from '../posts'
 import { HomeConfig, postUrl } from '../../constant/type'
 import Navbar from '../../component/navbar'
 import styles from './styles.module.css'
-import { transformDate2String } from '../../common/utils'
+import { transformDate2String, transformDate2Year } from '../../common/utils'
 import Waiting from '../../component/waiting'
 
 interface IArchivesListState {
@@ -30,8 +30,14 @@ export default class ArchivesList extends React.Component<
       })
     })
     getArchives().then((res) => {
+      const archive = res.sort((a, b) => {
+        if (a.time && b.time) {
+          return b.time - a.time
+        }
+        return 0
+      })
       this.setState({
-        archive: res
+        archive: archive
       })
     })
   }
@@ -41,24 +47,33 @@ export default class ArchivesList extends React.Component<
       return <Waiting></Waiting>
     }
     const { site_name = '', navigate_bar } = homeConfig
-
+    const years = new Set()
     return (
       <div>
         {homeConfig && <Navbar title={site_name} linkItemList={navigate_bar} />}
         <div className={styles.container}>
           {archive &&
             archive.map((item, idx) => {
+              let year = transformDate2Year(item.time)
+              if (years.has(year)) {
+                year = undefined
+              } else {
+                years.add(year)
+              }
               return (
-                <a
-                  className={styles.item}
-                  href={`${postUrl}?_id=${item._id}`}
-                  key={idx}
-                >
-                  <div className={styles.title}>{item.title}</div>
-                  <div className={styles.time}>
-                    {transformDate2String(item.time, 'date')}
-                  </div>
-                </a>
+                <div>
+                  {year && <div className={styles.year}>{year}</div>}
+                  <a
+                    className={styles.item}
+                    href={`${postUrl}?_id=${item._id}`}
+                    key={idx}
+                  >
+                    <div className={styles.title}>{item.title}</div>
+                    <div className={styles.time}>
+                      {transformDate2String(item.time, 'date')}
+                    </div>
+                  </a>
+                </div>
               )
             })}
         </div>

@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 800px;
   margin: auto;
-  margin-top: 100px;
 }
 .item {
   display: flex;
@@ -29,4 +28,19 @@
   border-radius: 5px;
   padding: 5px 10px;
   font-size: 15px;
+}
+.year {
+  width: 800px;
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .item {
+    color: #e7e7e7;
+  }
 }

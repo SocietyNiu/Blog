@@ -31,3 +31,9 @@
   margin-top: 30px;
   color: #333333;
 }
+
+@media (prefers-color-scheme: dark) {
+  .waiting {
+    color: #e7e7e7;
+  }
+}

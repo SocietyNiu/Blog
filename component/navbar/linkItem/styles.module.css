@@ -29,3 +29,15 @@
   text-decoration: none;
   color: #2e2e2e;
 }
+
+@media (prefers-color-scheme: dark) {
+  .title {
+    color: #e7e7e7;
+  }
+  .button {
+    color: #ffffff;
+  }
+  .button:hover {
+    color: #c5cee7;
+  }
+}

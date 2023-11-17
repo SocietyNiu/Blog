@@ -20,11 +20,7 @@ export const transformDate2String = (date?: number, type?: 'time' | 'date') => {
   var second = time.getSeconds()
   if (type === 'date') {
     return (
-      year +
-      '-' +
-      (month < 10 ? '0' + month : month) +
-      '-' +
-      (day < 10 ? '0' + day : day)
+      (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day)
     )
   }
   return (
@@ -32,12 +28,20 @@ export const transformDate2String = (date?: number, type?: 'time' | 'date') => {
     '-' +
     (month < 10 ? '0' + month : month) +
     '-' +
-    (day < 10 ? '0' + day : day) +
+    (day < 10 ? '0' + day : day)
+    /*+
     ' ' +
     (hour < 10 ? '0' + hour : hour) +
     ':' +
     (minute < 10 ? '0' + minute : minute) +
     ':' +
-    (second < 10 ? '0' + second : second)
+    (second < 10 ? '0' + second : second)*/
   )
+}
+
+export const transformDate2Year = (date?: number) => {
+  if (!date) return undefined
+  var time = new Date(date)
+  var year = time.getFullYear()
+  return year
 }
