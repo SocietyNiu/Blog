@@ -61,12 +61,11 @@ export default class ArchivesList extends React.Component<
                 years.add(year)
               }
               return (
-                <div>
+                <div key={idx}>
                   {year && <div className={styles.year}>{year}</div>}
                   <a
                     className={styles.item}
                     href={`${postUrl}?_id=${item._id}`}
-                    key={idx}
                   >
                     <div className={styles.title}>{item.title}</div>
                     <div className={styles.time}>
